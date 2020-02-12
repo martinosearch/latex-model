@@ -165,27 +165,27 @@
   \medskip
 }
 
-\def\@dottedtocline#1#2#3#4#5
-{%
-    \vskip \z@ \@plus.2\p@
-    {%
-     \leftskip#2\relax\rightskip\@tocrmarg\parfillskip-\rightskip
-     \parindent #2\relax\@afterindenttrue
-     \interlinepenalty\@M
-     \leavevmode
-     \@tempdima #3\relax
-     \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-     {%
-     	\sectiontitle@font#4
-     }
-     \nobreak\sectiontitle@font
-     \leaders\hbox{$\m@th
-        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
-        mu$}\hfill
-     \nobreak
-     \hb@xt@\@pnumwidth{\hfil #5}%
-     \par}%
-}
+%\def\@dottedtocline#1#2#3#4#5
+%{%
+%    \vskip \z@ \@plus.2\p@
+%    {%
+%     \leftskip#2\relax\rightskip\@tocrmarg\parfillskip-\rightskip
+%     \parindent #2\relax\@afterindenttrue
+%     \interlinepenalty\@M
+%     \leavevmode
+%     \@tempdima #3\relax
+%     \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+%     {%
+%     	\sectiontitle@font#4
+%     }
+%     \nobreak\sectiontitle@font
+%     \leaders\hbox{$\m@th
+%        \mkern \@dotsep mu\hbox{.}\mkern \@dotsep
+%        mu$}\hfill
+%     \nobreak
+%     \hb@xt@\@pnumwidth{\hfil #5}%
+%     \par}%
+%}
   
 \renewcommand*\l@section{%
 \color{\sectiontoccolor}

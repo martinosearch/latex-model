@@ -22,9 +22,11 @@
 \RequirePackage{multicol}
 \RequirePackage{calc}
 \usepackage{amsmath,amssymb,amsfonts}
+\usepackage{alterqcm}
 \usepackage{fp}
 
-\usepackage{fancyhdr}
+\usepackage[top=0.5cm,bottom=2cm,left=1cm,right=1cm]{geometry} 
+\RequirePackage{fancyhdr}
 \pagestyle{fancy}
 
 % Les packages nécessaires pour faire fonctionner les macros qui suivent
@@ -34,7 +36,9 @@
 \newcounter{td}
 \newcounter{devoir}
 \FPset\TOTALCOMPETENCE{0}
-\FPset\TOTALEXO{0}
+\FPset\ptUN{0}
+\FPset\ptDEUX{0}
+
 
 	\newlist{remslist}{itemize}{1}
 	\setlist[remslist,1]{%
@@ -80,13 +84,7 @@
 				leftmargin=16pt,
 				labelindent=0pt
 				}
-				
-\RequirePackage[%
-			hmargin=1cm,
-			vmargin=1.5cm
-			%,showframe,showcrop
-			]{geometry}
-			
+		
 \RequirePackage{mdframed}			
 
 \setlength{\parindent}{0pt}
@@ -158,7 +156,6 @@
 
 
 %fancyhead
-
 \if@fancyhdr
 	\RequirePackage{fancyhdr}
 	\fancypagestyle{chapterstart}{% 1ère page des chapitres
@@ -1088,7 +1085,7 @@
 \newcounter{count@exo}[chapter]
 \newenvironment{exo}[1][]
 {%
-\FPeval{\total}{round(\TOTALEXO:2)}
+\FPeval{\total}{round(\ptUN:2)}
 \refstepcounter{count@exo}
 \ifx\hfuzz#1\hfuzz
 \renewcommand\teach@title{\underline{\teach@title@exo~\thecount@exo}}
@@ -1261,7 +1258,7 @@
  & 
 \begin{minipage}{6cm} 
 \textbf{COMPLEXE SCOLAIRE\\ LA COURONNE D'OR}\\
-\small{Tel: 90 17 70 73}\\\small{email: couronnedor20@gmail.com}
+\small{Tel: 93 56 92 92 / 97 19 20 84}\\\small{email: couronnedor20@gmail.com}
 \end{minipage}  &
 \begin{minipage}{12cm}
 \textbf{#1}\\
@@ -1338,10 +1335,22 @@
    \calculPtsComp{#2}
 }
 
+% mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm  total partiel mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+\newcommand{\totalexo}{%
+\FPeval{\totalp}{round(\ptUN:2)}
+   \competence{TOTAL PARTIEL= \totalp}{0}
+}
+
 \def\gaddtotok#1{\global\tabtok\expandafter{\the\tabtok#1}}
 \newtoks\tabtok
 
 
+
+
+
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ table of competences $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+% $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 \newcommand{\tableofcompetences}{%
 \newpage
 \FPeval{\total}{round(\TOTALCOMPETENCE:2)}
@@ -1356,7 +1365,7 @@
    \multido{\i=1+1}{\thecount@competence}{
    \gaddtotok{\stepcounter{count@boucle}
    \csname num \roman{count@boucle}\endcsname &
-   \csname compet\roman{count@boucle}\endcsname & \hspace*{1cm} / \csname bareme\roman{count@boucle}\endcsname ~pt\\ \hline}%
+   \csname compet\roman{count@boucle}\endcsname & \hspace*{1cm} / \csname bareme\roman{count@boucle}\endcsname ~pt(s)\\ \hline}%
    }
    
    \gaddtotok{\end{tabularx}}%
@@ -1376,6 +1385,7 @@
    
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Retouche perso pour afficher le total des points
 %Pour compter le total de points %%%%%%%%%%%%%%%%%%%%%% perso
+
 \newcommand{\calculPtsComp}[1]{ % arg1 = code de la compétence ; arg2 = nombre de points
 %\ifthenelse{\equal{#1}{FRA}}{\FPadd{\pointsFRA}{\pointsFRA}{#2}}{}
 %\ifthenelse{\equal{#1}{COM}}{\FPadd{\pointsCOM}{\pointsCOM}{#2}}{}
@@ -1383,8 +1393,16 @@
 \FPadd{\TOTALCOMPETENCE}{\TOTALCOMPETENCE}{#1}
 \global\let\TOTALCOMPETENCE\TOTALCOMPETENCE
 
-\FPadd{\TOTALEXO}{\TOTALEXO}{#1}
-\global\let\TOTALEXO\TOTALEXO
+\ifthenelse{\equal{\thecount@exo}{1}}{
+\FPadd{\ptUN}{\ptUN}{#1}
+\global\let\ptUN\ptUN
+}{}
+
+\ifthenelse{\equal{\thecount@exo}{2}}{
+\FPadd{\ptDEUX}{\ptDEUX}{#1}
+\global\let\ptDEUX\ptDEUX
+}{}
+
 }
 
 

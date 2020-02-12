@@ -307,7 +307,7 @@
 	\ifx#1\@empty\xdef\pluriel@ex{}\else\xdef\pluriel@ex{#1}\fi
 	\itemclass{extitle@bg@color}{\extitle@font}
 	\begin{lrbox}{\ex@box}
-	\begin{minipage}{\dimexpr\linewidth-\marginleft}
+	\begin{minipage}{\dimexpr\linewidth-\marginleft}%
 }
 {%
 	\end{minipage}
