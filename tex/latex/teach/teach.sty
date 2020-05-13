@@ -5,7 +5,7 @@
 \ProvidesPackage{teach}[2018/10/05]
 \usepackage[utf8]{inputenc}
 \RequirePackage{titlesec}
-\RequirePackage{graphicx}
+\RequirePackage{graphicx} 
 \RequirePackage[table]{xcolor}
 \RequirePackage{cellspace}
 	\setlength{\cellspacebottomlimit}{4pt}
@@ -19,7 +19,7 @@
 \RequirePackage{lipsum}
 \RequirePackage{multirow}
 \RequirePackage[T1]{fontenc}
-\RequirePackage{multicol}
+\RequirePackage{multicol} 
 \RequirePackage{calc}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{alterqcm}
@@ -340,7 +340,6 @@
 \def\redefinetitle#1#2{\expandafter\renewcommand\csname teach@title@#1\endcsname{#2}}
 
 % Chapter
-
 	\titleformat{\chapter}[block]
  	{\Large\bfseries\color{\teach@chapter@global@color}\vspace*{-2cm}}
  	{\raisebox{-\height}{\sffamily\scriptsize\MakeUppercase{\chaptertitlename}}%
@@ -377,7 +376,7 @@
  \if@minitoc
  	\ifnum\thechapter>0
  		\vspace{1em}
- 		\fontfamily{lmss}\bfseries\selectfont Plan de ce chapitre\par 
+ 		\fontfamily{lmss}\bfseries\selectfont Les sections \par 
  		\minitoc
  	\fi
  \fi

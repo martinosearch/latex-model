@@ -5,7 +5,7 @@
 \ProvidesPackage{teach}[2018/10/05]
 \usepackage[utf8]{inputenc}
 \RequirePackage{titlesec}
-\RequirePackage{graphicx}
+\RequirePackage{graphicx} 
 \RequirePackage[table]{xcolor}
 \RequirePackage{cellspace}
 	\setlength{\cellspacebottomlimit}{4pt}
@@ -19,7 +19,7 @@
 \RequirePackage{lipsum}
 \RequirePackage{multirow}
 \RequirePackage[T1]{fontenc}
-\RequirePackage{multicol}
+\RequirePackage{multicol} 
 \RequirePackage{calc}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{alterqcm}
@@ -340,7 +340,6 @@
 \def\redefinetitle#1#2{\expandafter\renewcommand\csname teach@title@#1\endcsname{#2}}
 
 % Chapter
-
 	\titleformat{\chapter}[block]
  	{\Large\bfseries\color{\teach@chapter@global@color}\vspace*{-2cm}}
  	{\raisebox{-\height}{\sffamily\scriptsize\MakeUppercase{\chaptertitlename}}%
@@ -1299,7 +1298,7 @@
  & 
 \begin{minipage}{6cm} 
 \textbf{COMPLEXE SCOLAIRE\\ LA COURONNE D'OR}\\
-\small{Tel: 90 17 70 73}\\\small{email: couronnedor20@gmail.com}
+\small{Tel: 93 56 92 92 / 97 19 20 84}\\\small{email: couronnedor20@gmail.com}
 \end{minipage}  &
 \begin{minipage}{12cm}
 \textbf{TRAVAUX DIRIGES DE #1 N\degre \thetd}\\
