@@ -203,10 +203,10 @@
 \newcommand{\teach@section@title@txtcolor}{red}
 \newcommand{\teach@subsection@title@txtcolor}{red!50!orange}
 \newcommand{\teach@subsubsection@title@txtcolor}{orange!50!black}
-\newcommand{\teach@defn@title@bgcolor}{green!50!black}
-\newcommand{\teach@defn@title@txtcolor}{white}
+
+\newcommand{\teach@defn@title@bgcolor}{white}
+\newcommand{\teach@defn@title@txtcolor}{blue}
 \newcommand{\teach@defn@body@txtcolor}{black}
-\newcommand{\teach@defn@item@textcolor}{yellow}
 
 \newcommand{\teach@thm@title@bgcolor}{red}
 \newcommand{\teach@thm@title@txtcolor}{white}
@@ -216,23 +216,34 @@
 \newcommand{\teach@demo@title@txtcolor}{white}
 \newcommand{\teach@demo@body@bgcolor}{gray!20}
 \newcommand{\teach@demo@body@txtcolor}{black}
+
 \newcommand{\teach@prop@title@bgcolor}{red!50!orange}
 \newcommand{\teach@prop@title@txtcolor}{white}
 \newcommand{\teach@prop@body@txtcolor}{black}
+
 \newcommand{\teach@lemme@title@bgcolor}{white}
 \newcommand{\teach@lemme@title@txtcolor}{orange!50!red}
 \newcommand{\teach@lemme@body@txtcolor}{black}
+
 \newcommand{\teach@cor@title@bgcolor}{white}
 \newcommand{\teach@cor@title@txtcolor}{orange!50!red}
 \newcommand{\teach@cor@body@txtcolor}{black}
+
 \newcommand{\teach@exemple@title@bgcolor}{white}
 \newcommand{\teach@exemple@title@txtcolor}{blue}
 \newcommand{\teach@exemple@body@txtcolor}{black}
+
+\newcommand{\teach@act@title@bgcolor}{white}
+\newcommand{\teach@act@title@txtcolor}{blue}
+\newcommand{\teach@act@body@txtcolor}{black}
+
 \newcommand{\teach@rem@body@txtcolor}{black}
 \newcommand{\teach@rem@title@txtcolor}{orange}
+
 \newcommand{\teach@exo@body@txtcolor}{black}
 \newcommand{\teach@exo@title@txtcolor}{blue!50!black}
 \newcommand{\teach@exo@rule@color}{blue!50!black}
+
 \newcommand{\teach@memento@title@txtcolor}{purple}
 \newcommand{\teach@attention@title@txtcolor}{red}
 
@@ -281,34 +292,48 @@
 \newcommand{\teach@section@title@txtcolor}{black}
 \newcommand{\teach@subsection@title@txtcolor}{black!75}
 \newcommand{\teach@subsubsection@title@txtcolor}{gray}
-\newcommand{\teach@defn@title@bgcolor}{black}
-\newcommand{\teach@defn@title@txtcolor}{white}
+
+\newcommand{\teach@defn@title@bgcolor}{white}
+\newcommand{\teach@defn@title@txtcolor}{black}
 \newcommand{\teach@defn@body@txtcolor}{black}
 \newcommand{\teach@defn@item@textcolor}{white}
+
 \newcommand{\teach@thm@title@bgcolor}{black}
 \newcommand{\teach@thm@title@txtcolor}{white}
 \newcommand{\teach@thm@body@txtcolor}{black}
+
 \newcommand{\teach@demo@title@bgcolor}{gray}
 \newcommand{\teach@demo@title@txtcolor}{white}
 \newcommand{\teach@demo@body@bgcolor}{gray!20}
 \newcommand{\teach@demo@body@txtcolor}{black}
+
 \newcommand{\teach@prop@title@bgcolor}{black}
 \newcommand{\teach@prop@title@txtcolor}{white}
 \newcommand{\teach@prop@body@txtcolor}{black}
+
 \newcommand{\teach@lemme@title@bgcolor}{white}
 \newcommand{\teach@lemme@title@txtcolor}{black}
 \newcommand{\teach@lemme@body@txtcolor}{black}
+
 \newcommand{\teach@cor@title@bgcolor}{white}
 \newcommand{\teach@cor@title@txtcolor}{black}
 \newcommand{\teach@cor@body@txtcolor}{black}
+
 \newcommand{\teach@exemple@title@bgcolor}{white}
 \newcommand{\teach@exemple@title@txtcolor}{black}
 \newcommand{\teach@exemple@body@txtcolor}{black}
+
+\newcommand{\teach@act@title@bgcolor}{white}
+\newcommand{\teach@act@title@txtcolor}{black}
+\newcommand{\teach@act@body@txtcolor}{black}
+
 \newcommand{\teach@rem@body@txtcolor}{black}
 \newcommand{\teach@rem@title@txtcolor}{black}
+
 \newcommand{\teach@exo@body@txtcolor}{black}
 \newcommand{\teach@exo@title@txtcolor}{black}
 \newcommand{\teach@exo@rule@color}{black}
+
 \newcommand{\teach@memento@title@txtcolor}{black}
 \newcommand{\teach@attention@title@txtcolor}{black}
 \newcommand{\teach@savf@title@bgcolor}{black}
@@ -323,6 +348,7 @@
 \def\teach@title@thm{Théorème}
 \def\teach@title@defn{Définition}
 \def\teach@title@defnabr{Déf.}
+
 \def\teach@title@defns{Définitions}
 \def\teach@title@defnsabr{Déf.}
 \def\teach@title@cor{Corollaire}
@@ -330,6 +356,7 @@
 \def\teach@title@prop{Propriété}
 \def\teach@title@dem{Démonstration}
 \def\teach@title@exemple{Exemple}
+\def\teach@title@act{Cherchons}
 \def\teach@title@exemples{Exemples}
 \def\teach@title@rem{Remarque}
 \def\teach@title@rems{Remarques}
@@ -574,44 +601,29 @@
 
 % Définition
 \newcounter{count@defn}[chapter]
-\newlength\teach@defn@box@height
-\newlength\teach@defn@box@depth
-\newlength\teach@defn@title@width
 \newenvironment{defn}[1][]
 {%
 \refstepcounter{count@defn}
 \ifx\hfuzz#1\hfuzz
-\renewcommand\teach@title{}
+\renewcommand\teach@title{\teach@title@defn~\thecount@defn}
 \else
-\renewcommand\teach@title{~(#1)}
+\renewcommand\teach@title{\teach@title@defn~\thecount@defn~(#1)}
 \fi
 \begin{lrbox}{\teach@box}
-\begin{minipage}{\dimexpr\linewidth-0.75em-3\tabcolsep-.4pt}
+\begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
 \color{\teach@defn@body@txtcolor}
 }
 {
 \end{minipage}
 \end{lrbox}
-\settoheight{\teach@defn@box@height}{\usebox{\teach@box}}
-\settodepth{\teach@defn@box@depth}{\usebox{\teach@box}}
-\addtolength{\teach@defn@box@height}{\teach@defn@box@depth}
-\settowidth{\teach@defn@title@width}{\teach@title@defn~\thecount@defn\teach@title}
-\ifthenelse
-	{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-	{%
-		\def\teach@title@name{\teach@title@defnabr~\thecount@defn\teach@title}%
-		\settowidth{\teach@defn@title@width}{\teach@title@name}
-		\ifthenelse
-			{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-			{\def\teach@title@name{\teach@title@defnabr\thecount@defn}}
-			{}
-	}
-	{\def\teach@title@name{\teach@title@defn~\thecount@defn\teach@title}}
-\vspace{1em}
-\begin{tabular}{>{\cellcolor{\teach@defn@title@bgcolor}}p{.75em}l@{}}
-\vspace*{-0.5\teach@defn@box@height}\rotatebox{0}{\makebox[\teach@defn@box@height]{\fontfamily{lmss}\bfseries\selectfont\textcolor{\teach@defn@title@txtcolor}{\teach@title@name}}} 
-& \usebox{\teach@box}
+\vspace{1em}\arrayrulecolor{\teach@defn@title@txtcolor}
+\begin{tabular}{|@{}Sl@{}}
+\multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@defn@title@txtcolor}{\teach@defn@title@bgcolor}{\textcolor{\teach@defn@title@txtcolor}{\teach@title\strut}}} \\
+\begin{tabular}{Sl@{}}
+ \\[-10pt]
+\usebox{\teach@box}
 \end{tabular}
+\end{tabular}\arrayrulecolor{black}
 \vspace{1em}
 }
 
@@ -619,119 +631,87 @@
 \newenvironment{defn*}[1][]
 {%
 \ifx\hfuzz#1\hfuzz
-\renewcommand\teach@title{}
+\renewcommand\teach@title{\teach@title@defn}
 \else
-\renewcommand\teach@title{~(#1)}
+\renewcommand\teach@title{\teach@title@defn~(#1)}
 \fi
 \begin{lrbox}{\teach@box}
-\begin{minipage}{\dimexpr\linewidth-0.75em-3\tabcolsep-.4pt}
+\begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
 \color{\teach@defn@body@txtcolor}
 }
 {
 \end{minipage}
 \end{lrbox}
-\settoheight{\teach@defn@box@height}{\usebox{\teach@box}}
-\settodepth{\teach@defn@box@depth}{\usebox{\teach@box}}
-\addtolength{\teach@defn@box@height}{\teach@defn@box@depth}
-\settowidth{\teach@defn@title@width}{\teach@title@defn\teach@title}
-\ifthenelse
-	{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-	{%
-		\def\teach@title@name{\teach@title@defnabr\teach@title}%
-		\settowidth{\teach@defn@title@width}{\teach@title@name}
-		\ifthenelse
-			{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-			{\def\teach@title@name{\teach@title@defnabr}}
-			{}
-	}
-	{\def\teach@title@name{\teach@title@defn\teach@title}}
-\vspace{1em}
-\begin{tabular}{>{\cellcolor{\teach@defn@title@bgcolor}}p{.75em}l@{}}
-\vspace*{-0.5\teach@defn@box@height}\rotatebox{90}{\makebox[\teach@defn@box@height]{\fontfamily{lmss}\bfseries\selectfont\textcolor{\teach@defn@title@txtcolor}{\teach@title@name}}} 
-& \usebox{\teach@box}
+\vspace{1em}\arrayrulecolor{\teach@defn@title@txtcolor}
+\begin{tabular}{|@{}Sl@{}}
+\multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@defn@title@txtcolor}{\teach@defn@title@bgcolor}{\textcolor{\teach@defn@title@txtcolor}{\teach@title\strut}}} \\
+\begin{tabular}{Sl@{}}
+ \\[-10pt]
+\usebox{\teach@box}
 \end{tabular}
+\end{tabular}\arrayrulecolor{black}
 \vspace{1em}
 }
 
-% Définitions
+% Exemples
 \newenvironment{defns}[1][]
 {%
 \refstepcounter{count@defn}
 \ifx\hfuzz#1\hfuzz
-\renewcommand\teach@title{}
+\renewcommand\teach@title{\teach@title@defns~\thecount@defn}
 \else
-\renewcommand\teach@title{~(#1)}
+\renewcommand\teach@title{\teach@title@defns~\thecount@defn~(#1)}
 \fi
 \begin{lrbox}{\teach@box}
-\begin{minipage}{\dimexpr\linewidth-0.75em-3\tabcolsep-.4pt}
+\begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
 \color{\teach@defn@body@txtcolor}
+\begin{exempleslist}
 }
 {
+\end{defnslist}
 \end{minipage}
 \end{lrbox}
-\settoheight{\teach@defn@box@height}{\usebox{\teach@box}}
-\settodepth{\teach@defn@box@depth}{\usebox{\teach@box}}
-\addtolength{\teach@defn@box@height}{\teach@defn@box@depth}
-\settowidth{\teach@defn@title@width}{\teach@title@defns~\thecount@defn\teach@title}
-\ifthenelse
-	{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-	{%
-		\def\teach@title@name{\teach@title@defnsabr~\thecount@defn\teach@title}%
-		\settowidth{\teach@defn@title@width}{\teach@title@name}
-		\ifthenelse
-			{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-			{\def\teach@title@name{\teach@title@defnsabr~\thecount@defn}}
-			{}
-	}
-	{\def\teach@title@name{\teach@title@defns~\thecount@defn\teach@title}}
-\vspace{1em}
-\begin{tabular}{>{\cellcolor{\teach@defn@title@bgcolor}}p{.75em}|Sl@{}}
-\vspace*{-0.5\teach@defn@box@height}\rotatebox{90}{\makebox[\teach@defn@box@height]{\fontfamily{lmss}\bfseries\selectfont\textcolor{\teach@defn@title@txtcolor}{\teach@title@name}}} 
-& \usebox{\teach@box}
+\vspace{1em}\arrayrulecolor{\teach@defn@title@txtcolor}
+\begin{tabular}{|@{}Sl@{}}
+\multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@defn@title@txtcolor}{\teach@defn@title@bgcolor}{\textcolor{\teach@defn@title@txtcolor}{\teach@title\strut}}} \\
+\begin{tabular}{Sl@{}}
+ \\[-10pt]
+\usebox{\teach@box}
 \end{tabular}
+\end{tabular}\arrayrulecolor{black}
 \vspace{1em}
 }
 
 %--> Version étoilée
+
 \newenvironment{defns*}[1][]
 {%
 \ifx\hfuzz#1\hfuzz
-\renewcommand\teach@title{}
+\renewcommand\teach@title{\teach@title@defns}
 \else
-\renewcommand\teach@title{~(#1)}
+\renewcommand\teach@title{\teach@title@defns~(#1)}
 \fi
 \begin{lrbox}{\teach@box}
-\begin{minipage}{\dimexpr\linewidth-0.75em-3\tabcolsep-.4pt}
-\color{\teach@defn@body@txtcolor}
+\begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
+\color{\teach@exemple@body@txtcolor}
+\begin{defnslist}
 }
 {
+\end{defnslist}
 \end{minipage}
 \end{lrbox}
-\settoheight{\teach@defn@box@height}{\usebox{\teach@box}}
-\settodepth{\teach@defn@box@depth}{\usebox{\teach@box}}
-\addtolength{\teach@defn@box@height}{\teach@defn@box@depth}
-\settowidth{\teach@defn@title@width}{\teach@title@defns\teach@title}
-\ifthenelse
-	{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-	{%
-		\def\teach@title@name{\teach@title@defnsabr\teach@title}%
-		\settowidth{\teach@defn@title@width}{\teach@title@name}
-		\ifthenelse
-			{\lengthtest{\teach@defn@box@height<\teach@defn@title@width}}
-			{\def\teach@title@name{\teach@title@defnsabr}}
-			{}
-	}
-	{\def\teach@title@name{\teach@title@defns\teach@title}}
-\vspace{1em}
-\begin{tabular}{>{\cellcolor{\teach@defn@title@bgcolor}}p{.75em}l@{}}
-\vspace*{-0.5\teach@defn@box@height}\rotatebox{90}{\makebox[\teach@defn@box@height]{\fontfamily{lmss}\bfseries\selectfont\textcolor{\teach@defn@title@txtcolor}{\teach@title@name}}} 
-& \usebox{\teach@box}
+\vspace{1em}\arrayrulecolor{\teach@defn@title@txtcolor}
+\begin{tabular}{|@{}Sl@{}}
+\multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@defn@title@txtcolor}{\teach@defn@title@bgcolor}{\textcolor{\teach@defn@title@txtcolor}{\teach@title\strut}}} \\
+\begin{tabular}{Sl@{}}
+ \\[-10pt]
+\usebox{\teach@box}
 \end{tabular}
+\end{tabular}\arrayrulecolor{black}
 \vspace{1em}
 }
 
 % Démonstrations
-
 \newcounter{indic@breakdemo}
 
 \newenvironment{demo}[1][] 
@@ -849,8 +829,35 @@
 \end{tabular}\arrayrulecolor{black}
 }
 
-% Exemple
+% Activité
+\newcounter{count@act}[chapter]
+\newenvironment{act}[1][]
+{%
+\refstepcounter{count@act}
+\ifx\hfuzz#1\hfuzz
+\renewcommand\teach@title{\teach@title@act~\thecount@act}
+\else
+\renewcommand\teach@title{\teach@title@act~\thecount@act~(#1)}
+\fi
+\begin{lrbox}{\teach@box}
+\begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
+\color{\teach@act@body@txtcolor}
+}
+{
+\end{minipage}
+\end{lrbox}
+\vspace{1em}\arrayrulecolor{\teach@act@title@txtcolor}
+\begin{tabular}{|@{}Sl@{}}
+\multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@act@title@txtcolor}{\teach@act@title@bgcolor}{\textcolor{\teach@act@title@txtcolor}{\teach@title\strut}}} \\
+\begin{tabular}{Sl@{}}
+ \\[-10pt]
+\usebox{\teach@box}
+\end{tabular}
+\end{tabular}\arrayrulecolor{black}
+\vspace{1em}
+}
 
+% Exemple
 \newcounter{count@exemple}[chapter]
 \newenvironment{exemple}[1][]
 {%
@@ -879,7 +886,6 @@
 }
 
 %--> Version étoilée
-
 \newenvironment{exemple*}[1][]
 {%
 \ifx\hfuzz#1\hfuzz
@@ -906,7 +912,6 @@
 }
 
 % Exemples
-
 \newenvironment{exemples}[1][]
 {%
 \refstepcounter{count@exemple}
@@ -966,7 +971,6 @@
 
 
 % Remarque
-
 \newlength\arrayvertrulewidth
 \setlength{\arrayvertrulewidth}{2pt}
 \newlength\arrayhspace
@@ -996,7 +1000,6 @@
 }
 
 % Remarques
-
 \newenvironment{rems}[1][]
 {%
 \ifx\hfuzz#1\hfuzz
