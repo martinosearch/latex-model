@@ -70,8 +70,8 @@
 				labelindent=-4pt
 				}
 				
-	\newlist{defitemize}{itemize}{1}
-	\setlist[defitemize,1]{%
+	\newlist{defnslist}{itemize}{1}
+	\setlist[defnslist,1]{%
 				labelsep=*,
 				label=$\blacktriangleright$,
 				leftmargin=16pt,
@@ -435,6 +435,9 @@
 \titlespacing{\subsubsection}
 {2em}{3.5ex plus .1ex minus .2ex}{1.5ex minus .1ex}
 
+% title les exercices
+\newcommand{\exos}{\section*{Les Exercices}}
+
 % Boîtes
 \newsavebox{\teach@box}
 
@@ -665,7 +668,7 @@
 \begin{lrbox}{\teach@box}
 \begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
 \color{\teach@defn@body@txtcolor}
-\begin{exempleslist}
+\begin{defnslist}
 }
 {
 \end{defnslist}
@@ -1320,6 +1323,31 @@
 \end{center}
 }
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% Retouche personnel en s'inspirant devoir %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% format examens %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\titreexamen}[4] %#1 : examen
+{
+\setcounter{count@exo}{0}
+
+\begin{center}
+\fontfamily{lmss}\selectfont
+
+%{lrbox}{\teach@box}
+\begin{tabular}{ccc} 
+\begin{minipage}{12cm} 
+\textbf{CPL LA COURONNE D'OR}
+\end{minipage}  &
+\begin{minipage}{12cm}
+\textbf{#1}
+\end{minipage} \\ 
+\end{tabular}\\
+\vspace{0.5cm}
+\underline{\textbf{#2}} \qquad \textit{\textbf{Coef: #3}} \qquad \textit{\textbf{Durée: #4}}
+\end{center}
+}
+
+
 % Compétences%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%un peu de retouche personnel%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1422,6 +1450,11 @@
 \newenvironment{td}[4]
 {%
 \titretd{#1}{#2}{#3}{#4}
+}
+
+\newenvironment{examen}[4]
+{%
+\titreexamen{#1}{#2}{#3}{#4}
 }
 
 %pour les accords pluriel pt/pts
