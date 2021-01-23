@@ -3,7 +3,7 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{teach}[2018/10/05]
-\usepackage[utf8]{inputenc}
+%\usepackage[utf8]{inputenc}
 \RequirePackage{titlesec}
 \RequirePackage{graphicx} 
 \RequirePackage[table]{xcolor}
@@ -38,7 +38,6 @@
 \FPset\TOTALCOMPETENCE{0}
 \FPset\ptUN{0}
 \FPset\ptDEUX{0}
-
 
 	\newlist{remslist}{itemize}{1}
 	\setlist[remslist,1]{%
@@ -108,6 +107,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%% commandes person %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\jar}[1]{\textbf{#1}}
+\newcommand{\jarm}[1]{\mathbf{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%% Page de garde%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -364,6 +364,8 @@
 \def\teach@title@memento{À retenir}
 \def\teach@title@attention{Attention}
 \def\teach@title@savf{Savoir- Faire}
+\def\teach@title@nb{N.B}
+\def\teach@title@methode{Coin méthode}
 \def\redefinetitle#1#2{\expandafter\renewcommand\csname teach@title@#1\endcsname{#2}}
 
 % Chapter
@@ -436,7 +438,7 @@
 {2em}{3.5ex plus .1ex minus .2ex}{1.5ex minus .1ex}
 
 % title les exercices
-\newcommand{\exos}{\section*{Les Exercices}}
+\newcommand{\exos}{\newpage \section*{Les Exercices}}
 
 % Boîtes
 \newsavebox{\teach@box}
@@ -776,9 +778,94 @@
 \endmdframed
 }
 	
+	
+% methodes$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+\newcounter{count@methode}[chapter]
+\newenvironment{methode}[1][] 
+{%
+\ifx\hfuzz#1\hfuzz
+\renewcommand\teach@title{\teach@title@methode}
+\else
+\renewcommand\teach@title{\teach@title@methode~(#1)}
+\fi
+\begin{lrbox}{\teach@box}
+\begin{minipage}{\dimexpr\linewidth-5\tabcolsep-0.4pt}
+\color{\teach@demo@body@txtcolor}
+}
+{
+\end{minipage}
+\end{lrbox}
+\vspace{1em}
+\begin{tabular}{@{}p{1em}Sl@{}}\multicolumn{2}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@demo@title@bgcolor}{\teach@demo@title@bgcolor}{\textcolor{\teach@demo@title@txtcolor}{\teach@title\ifnum\theindic@breakdemo=0\else~-- Suite\fi\strut}}} \\%
+ & \cellcolor{\teach@demo@body@bgcolor}\\[-10pt] 
+ & \cellcolor{\teach@demo@body@bgcolor}\usebox{\teach@box}
+\end{tabular}
+\vspace{1em}
+\setcounter{indic@breakdemo}{0}
+}
+
+% Methodes
+\newenvironment{methodes}[1][]
+{%
+\refstepcounter{count@methode}
+\ifx\hfuzz#1\hfuzz
+\renewcommand\teach@title{\teach@title@methode~\thecount@methode}
+\else
+\renewcommand\teach@title{\teach@title@methode~\thecount@methode~(#1)}
+\fi
+\begin{lrbox}{\teach@box}
+\begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
+\color{\teach@defn@body@txtcolor}
+\begin{defnslist}
+}
+{
+\end{defnslist}
+\end{minipage}
+\end{lrbox}
+\vspace{1em}\arrayrulecolor{\teach@defn@title@txtcolor}
+\begin{tabular}{|@{}Sl@{}}
+\multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@defn@title@txtcolor}{\teach@defn@title@bgcolor}{\textcolor{\teach@defn@title@txtcolor}{\teach@title\strut}}} \\
+\begin{tabular}{Sl@{}}
+ \\[-10pt]
+\usebox{\teach@box}
+\end{tabular}
+\end{tabular}\arrayrulecolor{black}
+\vspace{1em}
+}
+
+%--> Version étoilée
+
+\newenvironment{methodes*}[1][]
+{%
+\ifx\hfuzz#1\hfuzz
+\renewcommand\teach@title{\teach@title@defns}
+\else
+\renewcommand\teach@title{\teach@title@defns~(#1)}
+\fi
+\begin{lrbox}{\teach@box}
+\begin{minipage}{\dimexpr\linewidth-2\tabcolsep+6pt}
+\color{\teach@exemple@body@txtcolor}
+\begin{defnslist}
+}
+{
+\end{defnslist}
+\end{minipage}
+\end{lrbox}
+\vspace{1em}\arrayrulecolor{\teach@defn@title@txtcolor}
+\begin{tabular}{|@{}Sl@{}}
+\multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@defn@title@txtcolor}{\teach@defn@title@bgcolor}{\textcolor{\teach@defn@title@txtcolor}{\teach@title\strut}}} \\
+\begin{tabular}{Sl@{}}
+ \\[-10pt]
+\usebox{\teach@box}
+\end{tabular}
+\end{tabular}\arrayrulecolor{black}
+\vspace{1em}
+}
+
 
 % Propriétés
 \newcounter{count@prop}[chapter]
+
 \newenvironment{prop}[1][]
 {%
 \refstepcounter{count@prop}
@@ -798,15 +885,14 @@
 \begin{tabular}{|@{}Sl@{}}
 \multicolumn{1}{@{}l}{\fontfamily{lmss}\bfseries\selectfont\fcolorbox{\teach@prop@title@bgcolor}{\teach@prop@title@bgcolor}{\textcolor{\teach@prop@title@txtcolor}{\teach@title\strut}}} \\
 \begin{tabular}{Sl@{}}
-\end{tabular}\arrayrulecolor{black}
  \\[-10pt]
 \usebox{\teach@box}
 \end{tabular}
+\end{tabular}\arrayrulecolor{black}
 \vspace{1em}
 }
 
 %--> Version étoilée
-
 \newenvironment{prop*}[1][]
 {%
 \ifx\hfuzz#1\hfuzz
@@ -828,8 +914,8 @@
  \\[-10pt]
 \usebox{\teach@box}
 \end{tabular}
-\vspace{1em}
 \end{tabular}\arrayrulecolor{black}
+\vspace{1em}
 }
 
 % Activité
@@ -1022,6 +1108,30 @@
 }
 {
 \end{remslist}
+\end{minipage}
+\end{tabular}
+\vspace{1em}
+}
+
+% noté bien
+\newenvironment{nb}[1][]
+{%
+\ifx\hfuzz#1\hfuzz
+\renewcommand\teach@title{\teach@title@nb.}
+\else
+\renewcommand\teach@title{\teach@title@nb~(#1).}
+\fi
+\vspace{1em}
+
+\begin{tabular}{@{\color{\teach@rem@title@txtcolor}\vrule width \arrayvertrulewidth\hspace*{\arrayhspace}}l@{}}
+\begin{minipage}{\dimexpr\linewidth-\arrayhspace-\arrayvertrulewidth}
+\color{\teach@rem@body@txtcolor}
+\bgroup
+\fontfamily{lmss}\bfseries\selectfont 
+\textcolor{\teach@rem@title@txtcolor}{\teach@title}
+\egroup~
+}
+{
 \end{minipage}
 \end{tabular}
 \vspace{1em}
@@ -1325,6 +1435,26 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% Retouche personnel en s'inspirant devoir %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\titrerevision}[1]{
+\begin{center}
+{\huge TRAVAUX DIRIGES DE MATHEMATIQUES}
+\end{center}
+
+\begin{center}
+\textit{Ecole: CPL LA COURONNE D'OR}
+
+\textit{Prof: #1}
+\end{center}
+
+\vspace{0.5cm}
+\setcounter{count@exo}{0}
+
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% Retouche personnel en s'inspirant devoir %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%% format examens %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\titreexamen}[4] %#1 : examen
 {
@@ -1341,9 +1471,9 @@
 \begin{minipage}{12cm}
 \textbf{#1}
 \end{minipage} \\ 
-\end{tabular}
+\end{tabular}\\
 \vspace{0.5cm}
-\underline{\textbf{#2}}
+\underline{\textbf{#2}} \qquad \textit{\textbf{Coef: #3}} \qquad \textit{\textbf{Durée: #4}}
 \end{center}
 }
 
@@ -1455,6 +1585,10 @@
 \newenvironment{examen}[4]
 {%
 \titreexamen{#1}{#2}{#3}{#4}
+}
+
+\newenvironment{revision}[1]{%
+\titrerevision{#1}
 }
 
 %pour les accords pluriel pt/pts
